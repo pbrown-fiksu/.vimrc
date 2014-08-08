@@ -1,2 +1,5 @@
 *
 !.gitignore
+!.vimrc
+!.tmux.conf
+!.tmux.lightline
