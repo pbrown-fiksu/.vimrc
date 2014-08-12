@@ -1,14 +1,28 @@
 " ptrckbrwn's .vimrc
 " Maintainer: Patrick Brown <http://pab.io/>
-" Version:    1.0
+"
+" Table of Contents
+" -----------------
+"
+" I.    NeoBundle
+" II.   Leader
+" III.  Language specific settings
+" IV.   Remaps
+" V.    Tabs
+" VI.   Moving/Searching
+" VII.  Text wrapping
+" VIII. Theme
+" IX.   Misc
+" X.    Helper functions
+" XI.   Plug in settings
 
-" NeoBundle
-" ---------
+" I. NeoBundle ----------------------------------------------------------------
+
 if has('vim_starting')
-  set runtimepath+=/Users/pbrown/.vim/bundle/neobundle.vim/
+  set runtimepath+=/Users/ptrckbrwn/.vim/bundle/neobundle.vim/
 endif
 
-call neobundle#begin(expand('/Users/pbrown/.vim/bundle'))
+call neobundle#begin(expand('/Users/ptrckbrwn/.vim/bundle'))
 
 NeoBundleFetch 'Shougo/neobundle.vim'
 
@@ -37,6 +51,7 @@ NeoBundle 'scrooloose/syntastic'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'scrooloose/nerdcommenter'
 
+NeoBundle 'ptrckbrwn/vim-vlux'
 NeoBundle 'tomtom/tlib_vim'
 NeoBundle 'edkolev/tmuxline.vim'
 NeoBundle 'MarcWeber/vim-addon-mw-utils'
@@ -58,59 +73,39 @@ call neobundle#end()
 filetype plugin indent on
 NeoBundleCheck
 
-" Leader
+" II. Leader ------------------------------------------------------------------
+
 let mapleader = ","
 let g:mapleader = ","
 
-" Dispatch
+" III. Language specific settings ---------------------------------------------
+
+" Go
 autocmd FileType go let b:dispatch = 'go test %:p:h'
 autocmd FileType go nnoremap <leader>f :Fmt<CR>
-autocmd FileType php let b:dispatch = 'phpunit'
+autocmd FileType go compiler go
+
+" Ruby
 autocmd FileType ruby let b:dispatch = 'rspec %'
+
+" Python
 autocmd FileType python let b:dispatch = 'nosetest %'
 
-let g:gundo_right = 1
+" IV. Remaps ------------------------------------------------------------------
 
-let g:lightline = {
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
-      \ },
-      \ 'component': {
-      \   'readonly': '%{&filetype=="help"?"":&readonly?"⭤":""}',
-      \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
-      \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
-      \ },
-      \ 'component_visible_condition': {
-      \   'readonly': '(&filetype!="help"&& &readonly)',
-      \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
-      \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
-      \ }
-      \ }
+" Escape
+imap <leader><leader> <Esc>
 
-let g:tmuxline_powerline_separators = 0
-let g:tmuxline_theme = 'lightline_visual'
-
-let g:rspec_command = "compiler rspec | set makeprg=zeus | Make rspec {spec}"
-
-""
-" Remaps
-""
-
+" Dispatch
 nnoremap <leader>d :Dispatch<CR>
 
-nmap <leader>t :TagbarToggle<CR>
-
-" RSpec.vim mappings
+" Rspec
 map <Leader>r :call RunCurrentSpecFile()<CR>
 map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>l :call RunLastSpec()<CR>
 map <Leader>a :call RunAllSpecs()<CR>
 
-" Remap escape to command mode.
-imap <leader><leader> <Esc>
-
-" Graphical Undo (Gundo)
+" Gundo
 nnoremap <leader>u :GundoToggle<CR>
 
 " Ack
@@ -129,7 +124,7 @@ map <leader>n :NERDTree<CR>
 " Paste mode
 set pastetoggle=<leader>p
 
-" remap increment <C-A>
+" Increment/decrement
 nnoremap <C-i> <C-a>
 nnoremap <C-d> <C-x>
 
@@ -146,18 +141,14 @@ map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
 
-""
-" Tabs
-""
+" V. Tabs ---------------------------------------------------------------------
 
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 set expandtab "softtabs
 
-""
-" Moving/Searching
-""
+" VI. Moving/Searching --------------------------------------------------------
 
 set ignorecase
 set smartcase
@@ -165,39 +156,30 @@ set gdefault
 set showmatch
 set hlsearch
 
-""
-" Text wrapping
-""
+" VII. Text wrapping ----------------------------------------------------------
 
 set wrap
 set textwidth=79
 set formatoptions=qrn1
-"set colorcolumn=79
+set colorcolumn=79
 
-""
-" Theme
-""
+" VIII. Theme -----------------------------------------------------------------
 
-colorscheme base16-solarized
+colorscheme base16-atelierdune
 set t_Co=256
-set background=dark
-
 set list
 set listchars=tab:▸\ ,eol:¬
 
-" Set extra options when running in GUI mode (no GUI installed on this machine)
+" Set extra options when running in GUI mode.
 if has("gui_running")
-    colorscheme base16-solarized
-    set transparency=5
     set guioptions-=T
     set guioptions+=e
-    set t_Co=256
     set guitablabel=%M\ %t
-    set guifont=Menlo:h13
+    set guifont=Menlo:h14
 endif
 
-" Misc
-" ----
+" IX. Misc --------------------------------------------------------------------
+
 set shell=zsh
 filetype plugin on
 filetype indent on
@@ -215,30 +197,10 @@ set ttyfast
 set undofile
 set undodir=~/.vim/undo//
 set ffs=unix,dos,mac
-" Store swap files in fixed location, not current directory.
 set dir=~/.vim/swp//
 
-""
-" Go
-""
-autocmd FileType go compiler go
+" X. Helper functions ---------------------------------------------------------
 
-""
-" Moving around, tabs, windows and buffers
-""
-" Delete trailing white space on save, useful for Python and CoffeeScript ;)
-func! DeleteTrailingWS()
-  exe "normal mz"
-  %s/\s\+$//ge
-  exe "normal `z"
-endfunc
-autocmd BufWrite *.py :call DeleteTrailingWS()
-autocmd BufWrite *.coffee :call DeleteTrailingWS()
-
-
-""
-" Helper functions
-""
 function! CmdLine(str)
     exe "menu Foo.Bar :" . a:str
     emenu Foo.Bar
@@ -296,11 +258,42 @@ function! <SID>BufcloseCloseIt()
    endif
 endfunction
 
-""
-" Neocomplete
-""
+" XI. Plug in settings --------------------------------------------------------
 
-"Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
+" Vlux
+let g:vlux_sunrise = 7
+let g:vlux_sunset = 19
+
+" Gundo
+let g:gundo_right = 1
+
+" Lightline
+let g:lightline = {
+  \ 'active': {
+  \   'left': [ [ 'mode', 'paste' ],
+  \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
+  \ },
+  \ 'component': {
+  \   'readonly': '%{&filetype=="help"?"":&readonly?"⭤":""}',
+  \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
+  \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
+  \ },
+  \ 'component_visible_condition': {
+  \   'readonly': '(&filetype!="help"&& &readonly)',
+  \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
+  \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
+  \ }
+  \ }
+
+" Tmuxline
+let g:tmuxline_powerline_separators = 0
+let g:tmuxline_theme = 'lightline_visual'
+
+" Rspec
+let g:rspec_command = "compiler rspec | set makeprg=zeus | Make rspec {spec}"
+
+" Neocomplete
+" Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
 " Disable AutoComplPop.
 let g:acp_enableAtStartup = 0
 " Use neocomplete.
@@ -316,7 +309,7 @@ let g:neocomplete#sources#dictionary#dictionaries = {
     \ 'default' : '',
     \ 'vimshell' : $HOME.'/.vimshell_hist',
     \ 'scheme' : $HOME.'/.gosh_completions'
-        \ }
+    \ }
 
 " Define keyword.
 if !exists('g:neocomplete#keyword_patterns')
@@ -333,8 +326,6 @@ inoremap <expr><C-l>     neocomplete#complete_common_string()
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 function! s:my_cr_function()
   return neocomplete#close_popup() . "\<CR>"
-  " For no inserting <CR> key.
-  "return pumvisible() ? neocomplete#close_popup() : "\<CR>"
 endfunction
 " <TAB>: completion.
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
@@ -343,27 +334,6 @@ inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><C-y>  neocomplete#close_popup()
 inoremap <expr><C-e>  neocomplete#cancel_popup()
-" Close popup by <Space>.
-"inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
-
-" For cursor moving in insert mode(Not recommended)
-"inoremap <expr><Left>  neocomplete#close_popup() . "\<Left>"
-"inoremap <expr><Right> neocomplete#close_popup() . "\<Right>"
-"inoremap <expr><Up>    neocomplete#close_popup() . "\<Up>"
-"inoremap <expr><Down>  neocomplete#close_popup() . "\<Down>"
-" Or set this.
-"let g:neocomplete#enable_cursor_hold_i = 1
-" Or set this.
-"let g:neocomplete#enable_insert_char_pre = 1
-
-" AutoComplPop like behavior.
-"let g:neocomplete#enable_auto_select = 1
-
-" Shell like behavior(not recommended).
-"set completeopt+=longest
-"let g:neocomplete#enable_auto_select = 1
-"let g:neocomplete#disable_auto_complete = 1
-"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
 
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -376,9 +346,6 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 if !exists('g:neocomplete#sources#omni#input_patterns')
   let g:neocomplete#sources#omni#input_patterns = {}
 endif
-"let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
 
 " For perlomni.vim setting.
 " https://github.com/c9s/perlomni.vim
