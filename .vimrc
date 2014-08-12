@@ -19,10 +19,10 @@
 " I. NeoBundle ----------------------------------------------------------------
 
 if has('vim_starting')
-  set runtimepath+=/Users/ptrckbrwn/.vim/bundle/neobundle.vim/
+  set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
 
-call neobundle#begin(expand('/Users/ptrckbrwn/.vim/bundle'))
+call neobundle#begin(expand('~/.vim/bundle'))
 
 NeoBundleFetch 'Shougo/neobundle.vim'
 
