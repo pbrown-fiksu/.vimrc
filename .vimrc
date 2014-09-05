@@ -51,7 +51,6 @@ NeoBundle 'scrooloose/syntastic'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'scrooloose/nerdcommenter'
 
-NeoBundle 'ptrckbrwn/vim-vlux'
 NeoBundle 'tomtom/tlib_vim'
 NeoBundle 'edkolev/tmuxline.vim'
 NeoBundle 'MarcWeber/vim-addon-mw-utils'
@@ -93,6 +92,11 @@ autocmd FileType python let b:dispatch = 'nosetest %'
 
 " IV. Remaps ------------------------------------------------------------------
 
+" Unmap gitgutter commands
+nnoremap <leader>hp <NOP>
+nnoremap <leader>hr <NOP>
+nnoremap <leader>hs <NOP>
+
 " Escape
 imap <leader><leader> <Esc>
 
@@ -102,8 +106,13 @@ nnoremap <leader>d :Dispatch<CR>
 " Rspec
 map <Leader>r :call RunCurrentSpecFile()<CR>
 map <Leader>s :call RunNearestSpec()<CR>
-map <Leader>l :call RunLastSpec()<CR>
-map <Leader>a :call RunAllSpecs()<CR>
+"map <Leader>l :call RunLastSpec()<CR>
+"map <Leader>a :call RunAllSpecs()<CR>
+
+" Tabs
+nnoremap <leader>t :tabnew<CR>
+nnoremap <leader>h :tabprevious<CR>
+nnoremap <leader>l :tabnext<CR>
 
 " Gundo
 nnoremap <leader>u :GundoToggle<CR>
@@ -161,7 +170,7 @@ set hlsearch
 set wrap
 set textwidth=79
 set formatoptions=qrn1
-set colorcolumn=79
+set colorcolumn=72,80
 
 " VIII. Theme -----------------------------------------------------------------
 
@@ -290,7 +299,8 @@ let g:tmuxline_powerline_separators = 0
 let g:tmuxline_theme = 'lightline_visual'
 
 " Rspec
-let g:rspec_command = "compiler rspec | set makeprg=zeus | Make rspec {spec}"
+" let g:rspec_command = "compiler rspec | set makeprg=zeus | Make rspec --format documentation {spec}"
+let g:rspec_command = "Dispatch rspec --format documentation {spec}"
 
 " Neocomplete
 " Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
