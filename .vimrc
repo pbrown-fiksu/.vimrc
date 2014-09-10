@@ -182,7 +182,10 @@ set listchars=tab:▸\ ,eol:¬
 " Set extra options when running in GUI mode.
 if has("gui_running")
     set guioptions-=T
-    set guioptions+=e
+    set guioptions-=e
+    set guioptions-=T
+    set guioptions-=L
+    set guioptions-=r
     set guitablabel=%M\ %t
     set guifont=Menlo:h14
 endif
