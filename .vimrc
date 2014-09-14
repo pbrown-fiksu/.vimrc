@@ -176,8 +176,7 @@ set colorcolumn=72,80
 
 colorscheme base16-atelierdune
 set t_Co=256
-set list
-set listchars=tab:▸\ ,eol:¬
+"set list
 
 " Set extra options when running in GUI mode.
 if has("gui_running")
