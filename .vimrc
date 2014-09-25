@@ -58,15 +58,10 @@ NeoBundle 'mileszs/ack.vim'
 NeoBundle 'chriskempson/base16-vim'
 NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'othree/html5.vim'
-NeoBundle 'itchyny/lightline.vim'
-NeoBundle 'kchmck/vim-coffee-script'
-NeoBundle 'elixir-lang/vim-elixir'
 NeoBundle 'airblade/vim-gitgutter'
-NeoBundle 'jnwhiteh/vim-golang'
 NeoBundle 'pangloss/vim-javascript'
 NeoBundle 'thoughtbot/vim-rspec'
 NeoBundle 'vim-ruby/vim-ruby'
-NeoBundle 'derekwyatt/vim-scala'
 
 call neobundle#end()
 filetype plugin indent on
@@ -87,9 +82,6 @@ autocmd FileType go compiler go
 " Ruby
 autocmd FileType ruby let b:dispatch = 'rspec %'
 
-" Python
-autocmd FileType python let b:dispatch = 'nosetest %'
-
 " IV. Remaps ------------------------------------------------------------------
 
 " Unmap gitgutter commands
@@ -106,13 +98,11 @@ nnoremap <leader>d :Dispatch<CR>
 " Rspec
 map <Leader>r :call RunCurrentSpecFile()<CR>
 map <Leader>s :call RunNearestSpec()<CR>
-"map <Leader>l :call RunLastSpec()<CR>
-"map <Leader>a :call RunAllSpecs()<CR>
+map <Leader>l :call RunLastSpec()<CR>
+map <Leader>a :call RunAllSpecs()<CR>
 
 " Tabs
 nnoremap <leader>t :tabnew<CR>
-nnoremap <leader>h :tabprevious<CR>
-nnoremap <leader>l :tabnext<CR>
 
 " Gundo
 nnoremap <leader>u :GundoToggle<CR>
@@ -168,15 +158,13 @@ set hlsearch
 " VII. Text wrapping ----------------------------------------------------------
 
 set wrap
-set textwidth=79
+set textwidth=80
 set formatoptions=qrn1
-set colorcolumn=72,80
 
 " VIII. Theme -----------------------------------------------------------------
 
 colorscheme base16-atelierdune
 set t_Co=256
-"set list
 
 " Set extra options when running in GUI mode.
 if has("gui_running")
@@ -271,34 +259,8 @@ endfunction
 
 " XI. Plug in settings --------------------------------------------------------
 
-" Vlux
-let g:vlux_sunrise = 7
-let g:vlux_sunset = 19
-
 " Gundo
 let g:gundo_right = 1
-
-" Lightline
-let g:lightline = {
-  \ 'active': {
-  \   'left': [ [ 'mode', 'paste' ],
-  \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
-  \ },
-  \ 'component': {
-  \   'readonly': '%{&filetype=="help"?"":&readonly?"⭤":""}',
-  \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
-  \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
-  \ },
-  \ 'component_visible_condition': {
-  \   'readonly': '(&filetype!="help"&& &readonly)',
-  \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
-  \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
-  \ }
-  \ }
-
-" Tmuxline
-let g:tmuxline_powerline_separators = 0
-let g:tmuxline_theme = 'lightline_visual'
 
 " Rspec
 " let g:rspec_command = "compiler rspec | set makeprg=zeus | Make rspec --format documentation {spec}"
