@@ -26,42 +26,46 @@ call neobundle#begin(expand('~/.vim/bundle'))
 
 NeoBundleFetch 'Shougo/neobundle.vim'
 
-" Shougo
+" Vim Extensions
+NeoBundle 'tpope/vim-sensible'
+NeoBundle 'sjl/gundo.vim'
+NeoBundle 'chriskempson/base16-vim'
+NeoBundle 'tomtom/tlib_vim'
+NeoBundle 'MarcWeber/vim-addon-mw-utils'
+
+" Linting/Completion
 NeoBundle 'Shougo/neocomplete.vim'
 NeoBundle 'Shougo/neosnippet.vim'
 NeoBundle 'Shougo/neosnippet-snippets'
+NeoBundle 'scrooloose/syntastic'
 
-" Tim Pope
-NeoBundle 'tpope/vim-sensible'
-NeoBundle 'tpope/vim-dispatch'
-NeoBundle 'tpope/vim-endwise'
-NeoBundle 'tpope/vim-eunuch'
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'tpope/vim-markdown'
-NeoBundle 'tpope/vim-rails'
-NeoBundle 'tpope/vim-rvm'
+" File Exploration
+NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'kien/ctrlp.vim'
+NeoBundle 'mileszs/ack.vim'
+
+" Text Manipulation
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-speeddating'
-
-" Steve Losh
-NeoBundle 'sjl/gundo.vim'
-
-" Martin Grenfell
-NeoBundle 'scrooloose/syntastic'
-NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'scrooloose/nerdcommenter'
 
-NeoBundle 'tomtom/tlib_vim'
-NeoBundle 'edkolev/tmuxline.vim'
-NeoBundle 'MarcWeber/vim-addon-mw-utils'
-NeoBundle 'mileszs/ack.vim'
-NeoBundle 'chriskempson/base16-vim'
-NeoBundle 'kien/ctrlp.vim'
-NeoBundle 'othree/html5.vim'
+" Git
+NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'airblade/vim-gitgutter'
-NeoBundle 'pangloss/vim-javascript'
-NeoBundle 'thoughtbot/vim-rspec'
+
+" OS
+NeoBundle 'tpope/vim-dispatch'
+NeoBundle 'tpope/vim-eunuch'
+
+" Ruby on Rails
 NeoBundle 'vim-ruby/vim-ruby'
+NeoBundle 'thoughtbot/vim-rspec'
+NeoBundle 'tpope/vim-rails'
+NeoBundle 'tpope/vim-rvm'
+NeoBundle 'tpope/vim-endwise'
+NeoBundle 'tpope/vim-markdown'
+NeoBundle 'pangloss/vim-javascript'
+NeoBundle 'othree/html5.vim'
 
 call neobundle#end()
 filetype plugin indent on
@@ -163,7 +167,7 @@ set formatoptions=qrn1
 
 " VIII. Theme -----------------------------------------------------------------
 
-colorscheme base16-atelierdune
+colorscheme base16-default
 set t_Co=256
 
 " Set extra options when running in GUI mode.
@@ -174,7 +178,7 @@ if has("gui_running")
     set guioptions-=L
     set guioptions-=r
     set guitablabel=%M\ %t
-    set guifont=Menlo:h14
+    set guifont=Source Code Pro:h14
 endif
 
 " IX. Misc --------------------------------------------------------------------
