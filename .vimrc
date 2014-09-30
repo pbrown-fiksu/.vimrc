@@ -178,7 +178,7 @@ if has("gui_running")
     set guioptions-=L
     set guioptions-=r
     set guitablabel=%M\ %t
-    set guifont=Source Code Pro:h14
+    set guifont=Source\ Code\ Pro:h14
 endif
 
 " IX. Misc --------------------------------------------------------------------
@@ -268,7 +268,7 @@ let g:gundo_right = 1
 
 " Rspec
 " let g:rspec_command = "compiler rspec | set makeprg=zeus | Make rspec --format documentation {spec}"
-let g:rspec_command = "Dispatch rspec --format documentation {spec}"
+let g:rspec_command = "Dispatch rspec {spec}"
 
 " Neocomplete
 " Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
