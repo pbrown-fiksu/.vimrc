@@ -163,6 +163,7 @@ set hlsearch
 
 set wrap
 set textwidth=80
+set colorcolumn=72,80
 set formatoptions=qrn1
 
 " VIII. Theme -----------------------------------------------------------------
