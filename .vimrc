@@ -111,6 +111,12 @@ nnoremap <leader>gp :Gpush<CR>
 nnoremap <leader>gb :Gblame<CR>
 nnoremap <leader>gl :Git l<CR>
 
+" Zeus
+nnoremap <leader>zc :Start zeus console<CR>
+nnoremap <leader>zdbs :Dispatch zeus rake db:migrate:status<CR>
+" no <CR> on purpose below
+nnoremap <leader>zdbm :Dispatch zeus rake db:migrate
+
 " NERDTree
 map <leader>n :NERDTree<CR>
 
