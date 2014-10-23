@@ -4,7 +4,7 @@
 " Table of Contents
 " -----------------
 "
-" I.    NeoBundle
+" I.    Plugins
 " II.   Leader
 " III.  Language specific settings
 " IV.   Remaps
@@ -14,62 +14,61 @@
 " VIII. Theme
 " IX.   Misc
 " X.    Helper functions
-" XI.   Plug in settings
+" XI.   Plugin settings
 
-" I. NeoBundle ----------------------------------------------------------------
+" I. Plugins ------------------------------------------------------------------
 
-if has('vim_starting')
-  set runtimepath+=~/.vim/bundle/neobundle.vim/
-endif
+set nocompatible
+filetype off
 
-call neobundle#begin(expand('~/.vim/bundle'))
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
-NeoBundleFetch 'Shougo/neobundle.vim'
+Plugin 'gmarik/Vundle.vim'
 
 " Vim Extensions
-NeoBundle 'tpope/vim-sensible'
-NeoBundle 'sjl/gundo.vim'
-NeoBundle 'chriskempson/base16-vim'
-NeoBundle 'tomtom/tlib_vim'
-NeoBundle 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tpope/vim-sensible'
+Plugin 'sjl/gundo.vim'
+Plugin 'chriskempson/base16-vim'
+Plugin 'tomtom/tlib_vim'
+Plugin 'MarcWeber/vim-addon-mw-utils'
 
 " Linting/Completion
-NeoBundle 'Shougo/neocomplete.vim'
-NeoBundle 'Shougo/neosnippet.vim'
-NeoBundle 'Shougo/neosnippet-snippets'
-NeoBundle 'scrooloose/syntastic'
+Plugin 'Shougo/neocomplete.vim'
+Plugin 'Shougo/neosnippet.vim'
+Plugin 'Shougo/neosnippet-snippets'
+Plugin 'scrooloose/syntastic'
 
 " File Exploration
-NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'kien/ctrlp.vim'
-NeoBundle 'mileszs/ack.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'kien/ctrlp.vim'
+Plugin 'mileszs/ack.vim'
 
 " Text Manipulation
-NeoBundle 'tpope/vim-surround'
-NeoBundle 'tpope/vim-speeddating'
-NeoBundle 'scrooloose/nerdcommenter'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-speeddating'
+Plugin 'scrooloose/nerdcommenter'
 
 " Git
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'airblade/vim-gitgutter'
+Plugin 'tpope/vim-fugitive'
+Plugin 'airblade/vim-gitgutter'
 
 " OS
-NeoBundle 'tpope/vim-dispatch'
-NeoBundle 'tpope/vim-eunuch'
+Plugin 'tpope/vim-dispatch'
+Plugin 'tpope/vim-eunuch'
 
 " Ruby on Rails
-NeoBundle 'vim-ruby/vim-ruby'
-NeoBundle 'thoughtbot/vim-rspec'
-NeoBundle 'tpope/vim-rails'
-NeoBundle 'tpope/vim-rvm'
-NeoBundle 'tpope/vim-endwise'
-NeoBundle 'tpope/vim-markdown'
-NeoBundle 'pangloss/vim-javascript'
-NeoBundle 'othree/html5.vim'
+Plugin 'vim-ruby/vim-ruby'
+Plugin 'thoughtbot/vim-rspec'
+Plugin 'tpope/vim-rails'
+Plugin 'tpope/vim-rvm'
+Plugin 'tpope/vim-endwise'
+Plugin 'tpope/vim-markdown'
+Plugin 'pangloss/vim-javascript'
+Plugin 'othree/html5.vim'
 
-call neobundle#end()
+call vundle#end()
 filetype plugin indent on
-NeoBundleCheck
 
 " II. Leader ------------------------------------------------------------------
 
@@ -77,11 +76,6 @@ let mapleader = ","
 let g:mapleader = ","
 
 " III. Language specific settings ---------------------------------------------
-
-" Go
-autocmd FileType go let b:dispatch = 'go test %:p:h'
-autocmd FileType go nnoremap <leader>f :Fmt<CR>
-autocmd FileType go compiler go
 
 " Ruby
 autocmd FileType ruby let b:dispatch = 'rspec %'
@@ -179,7 +173,7 @@ if has("gui_running")
     set guioptions-=L
     set guioptions-=r
     set guitablabel=%M\ %t
-    set guifont=Source\ Code\ Pro:h14
+    set guifont=Menlo:h12
 endif
 
 " IX. Misc --------------------------------------------------------------------
@@ -189,7 +183,6 @@ filetype plugin on
 filetype indent on
 syntax enable
 set cursorline
-set nocompatible
 set nu
 set lazyredraw
 set showmode
@@ -268,8 +261,8 @@ endfunction
 let g:gundo_right = 1
 
 " Rspec
-" let g:rspec_command = "compiler rspec | set makeprg=zeus | Make rspec --format documentation {spec}"
-let g:rspec_command = "Dispatch rspec {spec}"
+let g:rspec_command = "compiler rspec | set makeprg=zeus | Make rspec {spec}"
+" let g:rspec_command = "Dispatch rspec {spec}"
 
 " Neocomplete
 " Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
