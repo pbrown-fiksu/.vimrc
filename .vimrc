@@ -82,11 +82,6 @@ autocmd FileType ruby let b:dispatch = 'rspec %'
 
 " IV. Remaps ------------------------------------------------------------------
 
-" Unmap gitgutter commands
-nnoremap <leader>hp <NOP>
-nnoremap <leader>hr <NOP>
-nnoremap <leader>hs <NOP>
-
 " Escape
 imap <leader><leader> <Esc>
 
