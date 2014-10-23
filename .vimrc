@@ -107,6 +107,7 @@ nnoremap <leader>/ :Ack<space>
 nnoremap <leader>g :Git<space>
 nnoremap <leader>gs :Gstatus<CR>
 nnoremap <leader>gci :Gcommit<CR>
+nnoremap <leader>gp :Gpush<CR>
 nnoremap <leader>gb :Gblame<CR>
 nnoremap <leader>gl :Git l<CR>
 
