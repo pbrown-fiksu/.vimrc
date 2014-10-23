@@ -47,7 +47,7 @@ Plugin 'mileszs/ack.vim'
 " Text Manipulation
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-speeddating'
-Plugin 'scrooloose/nerdcommenter'
+Plugin 'tpope/vim-commentary'
 
 " Git
 Plugin 'tpope/vim-fugitive'
