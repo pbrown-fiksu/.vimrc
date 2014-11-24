@@ -164,7 +164,8 @@ set formatoptions=qrn1
 
 " VIII. Theme -----------------------------------------------------------------
 
-colorscheme base16-default
+colorscheme base16-eighties
+set bg=dark
 set t_Co=256
 
 " Set extra options when running in GUI mode.
