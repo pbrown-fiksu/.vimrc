@@ -51,7 +51,6 @@ Plugin 'tpope/vim-commentary'
 
 " Git
 Plugin 'tpope/vim-fugitive'
-Plugin 'airblade/vim-gitgutter'
 
 " OS
 Plugin 'tpope/vim-dispatch'
@@ -159,7 +158,6 @@ set hlsearch
 
 set wrap
 set textwidth=80
-set colorcolumn=72,80
 set formatoptions=qrn1
 
 " VIII. Theme -----------------------------------------------------------------
